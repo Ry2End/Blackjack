@@ -1,23 +1,16 @@
-// ConsoleApplication1.cpp : Ýòîò ôàéë ñîäåðæèò ôóíêöèþ "main". Çäåñü íà÷èíàåòñÿ è çàêàí÷èâàåòñÿ âûïîëíåíèå ïðîãðàììû.
-//
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <random>
 
-const unsigned short DECK_SIZE = 52; // Êîëè÷åñòâî êàðò â êîëîäå
-const unsigned short NUMBER_SIZE = 13; // Ðàçëè÷íûå íîìèíàëû êàðò
-const unsigned short SUIT_SIZE = 4; // Ìàñòè
+const unsigned short DECK_SIZE = 52;	// Количество карт в колоде
+const unsigned short NUMBER_SIZE = 13;	// Различные номиналы карт
+const unsigned short SUIT_SIZE = 4;	// Масти
 
 
 int main()
 {
-    std::cout << "Ðàáîòàåò òåñòîâàÿ âåðñèÿ ïðîãðàììû \"Áëåêäæåê\" (ïîêà ÷òî áåç øëþõ)\n";
-    //setlocale(LC_ALL, "ru_RU");
-    system("chcp 1251");
-
     class Card
     {
     public:
@@ -31,9 +24,8 @@ int main()
             //std::cout << "Destruct Card\t";
         }
 
-        void show_card() //Âûâîä êàðòû íà ïå÷àòü. Ïå÷àòü ïðîèñõîäèò â ôîðìàòå çíà÷åíèå-ìàñòü. Ïðèìåð: JHeart, 10Clubs
-        {
-            if (value >= 2 and value <= 10) //Ïå÷àòü ñèëû êàðòû
+        void show_card() {	//Вывод карты на печать. Печать происходит в формате значение-масть. Пример: JHeart, 10Clubs
+            if (value >= 2 and value <= 10)	//Печать силы карты
                 std::cout << value;
             else
             {
@@ -57,7 +49,7 @@ int main()
                 }
             }
 
-            switch (suit) // Ïå÷àòü ìàñòè
+            switch (suit) // Печать масти
             {
                 case 0:
                     std::cout << "Heart";
@@ -89,7 +81,7 @@ int main()
         }
 
     private:
-        unsigned short int value; // Ñèëà êàðòû. Îò 2óõ äî 14òè. 2 - 10 - îáû÷íàÿ ñèëà, 11 - Âàëåò, 12 - Äàìà, 13 - Êîðîëü, 14 - Òóç
+        unsigned short int value; // Сила карты. От 2ух до 14ти. 2 - 10 - обычная сила, 11 - Валет, 12 - Дама, 13 - Король, 14 - Туз
         unsigned short int suit; // 0 - "Heart", 1 - "Spades", 2 - "Diamonds", 3 - "Clubs"
     };
 
@@ -100,17 +92,17 @@ int main()
         Deck()
         {
             one_deck.resize(0);
-            //std::cout << "Êîíñòðóòîð Äýêè" << std::endl;
+            //std::cout << "Конструктор Дэки" << std::endl;
             for (unsigned short v = 2; v < NUMBER_SIZE + 2; v++)
                 for (unsigned short s = 0; s < SUIT_SIZE; s++)
                     one_deck.emplace_back(v, s);
-            std::cout << "Äåêà ñôîðìèðîâàíà" << std::endl;
+            std::cout << "Дэка построена" << std::endl;
 
         }
 
         ~Deck()
         {
-            //std::cout << "Ñðàáîòàë äåñòðóêòîð" << std::endl;
+            //std::cout << "Деструктор дэки отработал" << std::endl;
         }
 
         void show_deck()
@@ -124,14 +116,14 @@ int main()
 
         void shuffle()
         {
-            std::cout << "Âûïîëíÿåòñÿ ïåðåìåøèâàíèå êîëîäû" << std::endl;
+            std::cout << "Выполняется перемешивание колоды" << std::endl;
             std::shuffle(one_deck.begin(), one_deck.end(), std::default_random_engine {});
 
         }
 
         Card topdeck()
         {
-            std::cout << "Âûäà÷à âåðõíåé êàðòû" << std::endl;
+            std::cout << "Взятие верхней карты" << std::endl;
             Card dealer_hand = one_deck[one_deck.size()-1];
             one_deck.pop_back();
             //dealer_hand.show_card();
@@ -158,7 +150,7 @@ int main()
 
         void show_hand()
         {
-            std::cout << "Ðóêà èãðîêà:" << std::endl;
+            std::cout << "Карты в руке:" << std::endl;
             for (unsigned short i = 0; i < _hand.size(); i++)
             {
                 //std::cout << "i= " << i << "\t";
@@ -213,14 +205,3 @@ int main()
     //player.show_hand();
 
 }
-
-// Çàïóñê ïðîãðàììû: CTRL+F5 èëè ìåíþ "Îòëàäêà" > "Çàïóñê áåç îòëàäêè"
-// Îòëàäêà ïðîãðàììû: F5 èëè ìåíþ "Îòëàäêà" > "Çàïóñòèòü îòëàäêó"
-
-// Ñîâåòû ïî íà÷àëó ðàáîòû
-//   1. Â îêíå îáîçðåâàòåëÿ ðåøåíèé ìîæíî äîáàâëÿòü ôàéëû è óïðàâëÿòü èìè.
-//   2. Â îêíå Team Explorer ìîæíî ïîäêëþ÷èòüñÿ ê ñèñòåìå óïðàâëåíèÿ âåðñèÿìè.
-//   3. Â îêíå "Âûõîäíûå äàííûå" ìîæíî ïðîñìàòðèâàòü âûõîäíûå äàííûå ñáîðêè è äðóãèå ñîîáùåíèÿ.
-//   4. Â îêíå "Ñïèñîê îøèáîê" ìîæíî ïðîñìàòðèâàòü îøèáêè.
-//   5. Ïîñëåäîâàòåëüíî âûáåðèòå ïóíêòû ìåíþ "Ïðîåêò" > "Äîáàâèòü íîâûé ýëåìåíò", ÷òîáû ñîçäàòü ôàéëû êîäà, èëè "Ïðîåêò" > "Äîáàâèòü ñóùåñòâóþùèé ýëåìåíò", ÷òîáû äîáàâèòü â ïðîåêò ñóùåñòâóþùèå ôàéëû êîäà.
-//   6. ×òîáû ñíîâà îòêðûòü ýòîò ïðîåêò ïîçæå, âûáåðèòå ïóíêòû ìåíþ "Ôàéë" > "Îòêðûòü" > "Ïðîåêò" è âûáåðèòå SLN-ôàéë.
