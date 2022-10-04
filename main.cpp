@@ -16,8 +16,8 @@ int main()
     public:
         Card(unsigned short int val = 2, unsigned short int su = 0)
         {
-            value = val;
-            suit = su;
+            _value = val;
+            _suit = su;
         }
         ~Card()
         {
@@ -25,11 +25,11 @@ int main()
         }
 
         void show_card() {	//Вывод карты на печать. Печать происходит в формате значение-масть. Пример: JHeart, 10Clubs
-            if (value >= 2 and value <= 10)	//Печать силы карты
-                std::cout << value;
+            if (_value >= 2 and _value <= 10)	//Печать силы карты
+                std::cout << _value;
             else
             {
-                switch (value)
+                switch (_value)
                 {
                     case 11:
                         std::cout << "J";
@@ -49,19 +49,19 @@ int main()
                 }
             }
 
-            switch (suit) // Печать масти
+            switch (_suit) // Печать масти
             {
                 case 0:
-                    std::cout << "Heart";
+                    std::cout << "\u2665 " << "Heart";
                     break;
                 case 1:
-                    std::cout << "Spades";
+                    std::cout << "\u2660 " << "Spades";
                     break;
                 case 2:
-                    std::cout << "Diamonds";
+                    std::cout << "\u2666 " << "Diamonds";
                     break;
                 case 3:
-                    std::cout << "Clubs";
+                    std::cout << "\u2663 " << "Clubs";
                     break;
             }
 
@@ -70,19 +70,19 @@ int main()
 
         unsigned short get_power()
         {
-            return value;
+            return _value;
         }
 
         Card operator=(const Card &oth_deck)
         {
-            value = oth_deck.value;
-            suit = oth_deck.suit;
+            _value = oth_deck._value;
+            _suit = oth_deck._suit;
             return* this;
         }
 
     private:
-        unsigned short int value; // Сила карты. От 2ух до 14ти. 2 - 10 - обычная сила, 11 - Валет, 12 - Дама, 13 - Король, 14 - Туз
-        unsigned short int suit; // 0 - "Heart", 1 - "Spades", 2 - "Diamonds", 3 - "Clubs"
+        unsigned short int _value; // Сила карты. От 2ух до 14ти. 2 - 10 - обычная сила, 11 - Валет, 12 - Дама, 13 - Король, 14 - Туз
+        unsigned short int _suit; // 0 - "Heart", 1 - "Spades", 2 - "Diamonds", 3 - "Clubs"
     };
 
     class Deck
@@ -182,10 +182,8 @@ int main()
 /*
     Card jh(14,2);
     jh.show_card();
-
     Card buf;
     buf.show_card();
-
 */
     //Card dealer_hand;
     Deck first;
