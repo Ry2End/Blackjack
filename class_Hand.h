@@ -51,7 +51,7 @@ public:
 
     void set_player_status(unsigned short set_status) //Задать статус игрока. Планируется для проверки состояния партии: 1 - игра продолжается, 2 - игрок перестал набирать карты, открылся. Очки <=21. 3 - игрок проиграл, очки > 21
     {
-        set_status = this->_status;
+        this->_status = set_status;
     }
     unsigned short get_player_status() 
     {

@@ -53,25 +53,31 @@ int main()
         std::cout << player.get_hand_power() << '\n';
         AI_cheat(pc_opponent, first);//Решение ИИ
 
-        std::cout << "## INFO: player_status " << player.get_player_status() << '\n';
-        std::cout << "## INFO: pc_opponent_status " << pc_opponent.get_player_status() << '\n';
-
     }
 
     //Результат
     std::cout << "You score is: " << player.get_hand_power() << '\n';
-    std::cout << "Opponent score is: " << pc_opponent.get_hand_power() << '\n';
-    if (player.get_hand_power() > 21)
-        if (pc_opponent.get_hand_power() <= 21)
-            std::cout << "YOU LOSE!" << '\n';
-        else 
-            std::cout << "TIE!" << '\n';
-    else
-        if (pc_opponent.get_hand_power() <= 21)
-            if (player.get_hand_power() > pc_opponent.get_hand_power())
-                std::cout << "YOU WIN!!!" << '\n';
-            else
-                std::cout << "YOU LOSE!" << '\n';
+    std::cout << "Opponent score is: " << pc_opponent.get_hand_power() << '\n' << '\n';
 
+    if (player.get_hand_power() > 21)
+        if (pc_opponent.get_hand_power() > 21) {
+            std::cout << "TIE!" << '\n';
+            return 0;
+        }
+        else {
+            std::cout << "YOU LOSE!" << '\n';
+            return 0;
+        }
+
+    if (pc_opponent.get_hand_power() > 21) {
+        std::cout << "YOU WIN!!!" << '\n';
+        return 0;
+        }
+
+    if (player.get_hand_power() > pc_opponent.get_hand_power())
+        std::cout << "YOU WIN!!!" << '\n';
+    else
+        std::cout << "YOU LOSE!" << '\n';
+    return 0;
 
 }
